@@ -1,0 +1,31 @@
+from selenium import webdriver
+import time
+from selenium.webdriver.support.select import Select
+
+driver = webdriver.Chrome(executable_path="c:\\chromedriver.exe")
+driver.implicitly_wait(5)
+driver.get("https://rahulshettyacademy.com/seleniumPractise/#/")
+driver.maximize_window()
+driver.find_element_by_css_selector("input.search-keyword").send_keys("ber")
+time.sleep(2)
+count = driver.find_elements_by_xpath("//div[@class ='products']/div")
+button = driver.find_elements_by_xpath("//div[@class ='product-action']/button")
+for button in button:
+    button.click()
+driver.find_element_by_css_selector("img[alt ='Cart']").click()
+driver.find_element_by_xpath("//button[@type ='button']").click()
+time.sleep(2)
+driver.find_element_by_class_name('promoCode').send_keys('rahulshettyacademy')
+time.sleep(2)
+driver.find_element_by_xpath("//button[@class ='promoBtn']").click()
+time.sleep(2)
+driver.find_element_by_xpath("//button[text()='Place Order']").click()
+time.sleep(2)
+dropdown = Select(driver.find_element_by_xpath("//select[@style='width: 200px;']"))
+dropdown.select_by_visible_text("Australia")
+time.sleep(2)
+driver.find_element_by_xpath("//input[@type='checkbox']").click()
+time.sleep(2)
+driver.find_element_by_xpath("//button[text()='Proceed']").click()
+time.sleep(2)
+driver.close()
